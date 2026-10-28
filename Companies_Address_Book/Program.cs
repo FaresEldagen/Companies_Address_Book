@@ -1,4 +1,6 @@
 using Companies_Address_Book.Data;
+using Companies_Address_Book.Services.Implementation;
+using Companies_Address_Book.Services.Interfaces;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +25,7 @@ namespace Companies_Address_Book
 
 
             #region Dependency Injection
-
+            builder.Services.AddScoped<ICompanyImportService, CompanyImportService>();
             #endregion
 
 
