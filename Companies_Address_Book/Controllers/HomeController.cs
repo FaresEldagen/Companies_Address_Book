@@ -1,30 +1,30 @@
 using System.Diagnostics;
-using Companies_Address_Book.Data;
-using Companies_Address_Book.Models.Entities;
 using Companies_Address_Book.Models.ViewModels;
 using Companies_Address_Book.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Companies_Address_Book.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ICompanyImportService _companyImportService;
+        private readonly ICompaniesService _companiesService;
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(
-            AppDbContext context,
             ICompanyImportService companyImportService,
+            ICompaniesService companiesService,
             ILogger<HomeController> logger)
         {
             _companyImportService = companyImportService;
+            _companiesService = companiesService;
             _logger = logger;
         }
 
+
         public async Task<IActionResult> Index()
         {
-            var companies = new List<Company>();
+            var companies = await _companiesService.GetAllCompaniesAsync();
 
             return View(companies);
         }
@@ -40,7 +40,9 @@ namespace Companies_Address_Book.Controllers
 
             _logger.LogInformation("Import action triggered with uploaded file: {FileName}", file.FileName);
             var importedCompanies = await _companyImportService.ImportCompaniesFromFileAsync(file);
-            return Json(importedCompanies);
+
+            var importedCompaniesCount = await _companiesService.ImportCompaniesAsync(importedCompanies);
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -85,6 +85,10 @@ namespace Companies_Address_Book.Services.Implementation
                 {
                     numContacts = parsedNum;
                 }
+                else
+                {
+                    continue;
+                }
 
                 int? maxContactAge = null;
                 if (parts.Length > 2 && int.TryParse(parts[2], out var parsedAge))
