@@ -1,4 +1,8 @@
 using Companies_Address_Book.Data;
+using Companies_Address_Book.Repositories.Implementation;
+using Companies_Address_Book.Repositories.Interfaces;
+using Companies_Address_Book.Services.Implementation;
+using Companies_Address_Book.Services.Interfaces;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +27,10 @@ namespace Companies_Address_Book
 
 
             #region Dependency Injection
+            builder.Services.AddScoped<ICompanyImportService, CompanyImportService>();
+            builder.Services.AddScoped<ICompaniesService, CompaniesService>();
 
+            builder.Services.AddScoped<ICompaniesRepository, CompaniesRepository>();
             #endregion
 
 
