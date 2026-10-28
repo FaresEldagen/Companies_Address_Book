@@ -1,4 +1,4 @@
-namespace Companies_Address_Book.Models
+namespace Companies_Address_Book.Models.ViewModels
 {
     public class ErrorViewModel
     {

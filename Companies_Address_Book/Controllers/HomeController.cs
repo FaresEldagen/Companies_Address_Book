@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Companies_Address_Book.Models;
+using Companies_Address_Book.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Companies_Address_Book.Controllers

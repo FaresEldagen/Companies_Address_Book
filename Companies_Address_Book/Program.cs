@@ -1,3 +1,7 @@
+using Companies_Address_Book.Data;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
+
 namespace Companies_Address_Book
 {
     public class Program
@@ -8,6 +12,20 @@ namespace Companies_Address_Book
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            #region Database Configuration
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+            #endregion
+
+
+            #region Dependency Injection
+
+            #endregion
+
 
             var app = builder.Build();
 
