@@ -1,0 +1,74 @@
+@model Companies_Address_Book.Models.ViewModels.CreateContactViewModel
+@{
+    ViewData["Title"] = "Create Contact";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="card-title mb-0">Create Contact</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-controller="Contacts" asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <!-- 1. Selection of Company -->
+                        <div class="mb-3">
+                            <label asp-for="CompanyId" class="form-label fw-semibold">Company</label>
+                            <select asp-for="CompanyId" asp-items="Model.CompaniesList" class="form-select" required>
+                                <option value="">-- Select Company --</option>
+                            </select>
+                            <span asp-validation-for="CompanyId" class="text-danger small"></span>
+                        </div>
+
+                        <!-- 2. Contact Name -->
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label fw-semibold">Contact Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter full name" maxlength="100" required />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <!-- 3. Date of Birth -->
+                        <div class="mb-3">
+                            <label asp-for="DateOfBirth" class="form-label fw-semibold">Date of Birth</label>
+                            <input asp-for="DateOfBirth" type="date" class="form-control" max="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                            <span asp-validation-for="DateOfBirth" class="text-danger small"></span>
+                        </div>
+
+                        <!-- 4. Phone Number -->
+                        <div class="mb-4">
+                            <label asp-for="PhoneNumber" class="form-label fw-semibold">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="e.g. +201012345678 or 01012345678" maxlength="15" required />
+                            <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Contact</button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Back to Companies</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -29,8 +29,10 @@ namespace Companies_Address_Book
             #region Dependency Injection
             builder.Services.AddScoped<ICompanyImportService, CompanyImportService>();
             builder.Services.AddScoped<ICompaniesService, CompaniesService>();
+            builder.Services.AddScoped<IContactsService, ContactsService>();
 
             builder.Services.AddScoped<ICompaniesRepository, CompaniesRepository>();
+            builder.Services.AddScoped<IContactsRepositories, ContactsRepository>();
             #endregion
 
 

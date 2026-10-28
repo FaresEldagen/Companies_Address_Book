@@ -7,5 +7,6 @@ namespace Companies_Address_Book.Repositories.Interfaces
         Task<List<Company>> GetAllCompaniesAsync();
         Task<List<string>> GetAllCompaniesNamesAsync();
         Task AddRangeAsync(IEnumerable<Company> companies);
+        Task<Company?> GetCompanyByIdAsync(int id);
     }
 }

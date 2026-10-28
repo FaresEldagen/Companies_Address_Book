@@ -30,5 +30,12 @@ namespace Companies_Address_Book.Repositories.Implementation
             await _context.Companies.AddRangeAsync(companies);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Company?> GetCompanyByIdAsync(int id)
+        {
+            return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+
     }
 }
